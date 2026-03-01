@@ -10,3 +10,11 @@ Task 3 — Analyse avec JADX GUI
 Task 4 — Recherche de chaînes sensibles
 <img width="1073" height="611" alt="image" src="https://github.com/user-attachments/assets/efdd4a7b-f2bd-46da-9b9a-c190a4627d1f" />
 <img width="975" height="608" alt="image" src="https://github.com/user-attachments/assets/07a897b6-b51c-411e-9de5-c0e976077446" />
+<img width="975" height="318" alt="image" src="https://github.com/user-attachments/assets/e7d82940-59bb-4e6a-a0cf-0eb70374db6b" />
+Task 5 — Convertir DEX → JAR avec dex2jar
+<img width="1441" height="309" alt="image" src="https://github.com/user-attachments/assets/9228b74c-81df-4280-bd55-6c95ca014207" />
+<img width="644" height="165" alt="image" src="https://github.com/user-attachments/assets/c9119abe-cb39-4743-a0dc-974471e66cca" />
+<img width="801" height="319" alt="image" src="https://github.com/user-attachments/assets/d7119ab4-a669-4edf-9f5b-49746fd68921" />
+convertir dex to jar :
+<img width="1082" height="153" alt="image" src="https://github.com/user-attachments/assets/ef96a972-30a6-4d85-94a6-10948c1ccd49" />
+
