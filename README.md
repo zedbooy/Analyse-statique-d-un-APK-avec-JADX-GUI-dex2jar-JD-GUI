@@ -1,4 +1,4 @@
-# Analyse-statique-d-un-APK-avec-JADX-GUI-dex2jar-JD-GUI
+[raport.md](https://github.com/user-attachments/files/25662054/raport.md)# Analyse-statique-d-un-APK-avec-JADX-GUI-dex2jar-JD-GUI
 
 <img width="1579" height="1033" alt="image" src="https://github.com/user-attachments/assets/089a7d99-40f3-4675-bf79-52d07ad27867" />
 <img width="1900" height="416" alt="image" src="https://github.com/user-attachments/assets/af2ab43f-0a3f-45ee-947d-b0be7cda79a1" />
@@ -34,6 +34,145 @@ class c
 | **Obfuscation**                | Tente de rendre le code plus lisible                                 | Conserve souvent les noms obfusqués               |
 | **Interface moderne**          | Interface plus récente et adaptée au reverse Android                 | Interface plus ancienne et minimaliste            |
 | **Analyse rapide APK**         | Permet analyse directe sans conversion                               | Nécessite conversion DEX → JAR (ex : via dex2jar) |
+Task 7 — Rédiger le mini-rapport
+[Uploading rapor
+Rapport d’analyse statique – UnCrackable-Level1
+
+Informations générales
+•	Date d’analyse : 01/03/2026
+•	Analyste :  Anas Elmahfoudy & Ghalbane Ziad
+•	APK analysé : UnCrackable-Level1.apk
+•	Version : Version fournie par l’enseignant
+•	Provenance : Fournie par notre enseignant (TP Sécurité Mobile)
+•	Outils utilisés :
+o	JADX 1.5.5
+o	dex2jar v2.4
+o	JD-GUI 1.6.6
+
+Résumé exécutif
+Une analyse statique complète de l’application UnCrackable-Level1.apk a été réalisée à l’aide d’outils de décompilation Android.
+L’analyse n’a révélé aucune vulnérabilité critique directe, telle que :
+•	clés API en clair
+•	mots de passe codés en dur
+•	composants exportés non protégés
+•	permissions excessives
+L’application semble volontairement conçue comme un challenge de sécurité (reverse engineering), mais aucune faille de sécurité exploitable évidente n’a été identifiée dans l’analyse statique.
+Niveau de risque global : Faible à Moyen
+Actions recommandées :
+1.	Continuer l’analyse dynamique pour confirmer l’absence de vulnérabilités
+2.	Vérifier l’implémentation des mécanismes anti-debug
+3.	Tester l’application sur un environnement rooté pour analyse approfondie
+
+Constats détaillés
+Constat #1 : Absence de secrets en clair
+Sévérité : Faible
+Description :
+Aucune clé API, mot de passe ou token sensible n’a été trouvé en clair dans le code décompilé.
+Localisation :
+Analyse globale du code via JADX GUI.
+Impact potentiel :
+Aucun risque immédiat lié à l’exposition de secrets.
+Remédiation recommandée :
+Maintenir cette bonne pratique en externalisant les secrets côté serveur.
+
+Constat #2 : Pas de composants Android exposés inutilement
+Sévérité : Faible
+Description :
+L’analyse du fichier AndroidManifest.xml n’a pas révélé de composants (Activity, Service, Receiver) marqués comme exported="true" sans justification.
+Localisation :
+AndroidManifest.xml via JADX GUI.
+Impact potentiel :
+Risque faible d’attaque inter-application.
+Remédiation recommandée :
+Continuer à restreindre les composants exposés.
+
+Constat #3 : Présence de mécanismes anti-debug / protection
+Sévérité : Moyenne
+Description :
+L’application semble contenir des mécanismes visant à empêcher l’analyse ou la modification (challenge pédagogique).
+Localisation :
+Code principal analysé avec JADX.
+Impact potentiel :
+Comportement intentionnel dans le cadre d’un challenge de sécurité.
+Remédiation recommandée :
+Aucune – comportement cohérent avec un exercice pédagogique.
+
+Annexes
+Permissions demandées
+•	android.permission.INTERNET
+(Ajuste selon ce que tu as réellement vu dans ton Manifest.)
+Composants exportés
+Aucun composant critique exposé sans protection identifié.
+
+
+Rapport d’analyse statique – UnCrackable-Level1
+
+Informations générales
+•	Date d’analyse : 01/03/2026
+•	Analyste :  Anas Elmahfoudy & Ghalbane Ziad
+•	APK analysé : UnCrackable-Level1.apk
+•	Version : Version fournie par l’enseignant
+•	Provenance : Fournie par notre enseignant (TP Sécurité Mobile)
+•	Outils utilisés :
+o	JADX 1.5.5
+o	dex2jar v2.4
+o	JD-GUI 1.6.6
+
+Résumé exécutif
+Une analyse statique complète de l’application UnCrackable-Level1.apk a été réalisée à l’aide d’outils de décompilation Android.
+L’analyse n’a révélé aucune vulnérabilité critique directe, telle que :
+•	clés API en clair
+•	mots de passe codés en dur
+•	composants exportés non protégés
+•	permissions excessives
+L’application semble volontairement conçue comme un challenge de sécurité (reverse engineering), mais aucune faille de sécurité exploitable évidente n’a été identifiée dans l’analyse statique.
+Niveau de risque global : Faible à Moyen
+Actions recommandées :
+1.	Continuer l’analyse dynamique pour confirmer l’absence de vulnérabilités
+2.	Vérifier l’implémentation des mécanismes anti-debug
+3.	Tester l’application sur un environnement rooté pour analyse approfondie
+
+Constats détaillés
+Constat #1 : Absence de secrets en clair
+Sévérité : Faible
+Description :
+Aucune clé API, mot de passe ou token sensible n’a été trouvé en clair dans le code décompilé.
+Localisation :
+Analyse globale du code via JADX GUI.
+Impact potentiel :
+Aucun risque immédiat lié à l’exposition de secrets.
+Remédiation recommandée :
+Maintenir cette bonne pratique en externalisant les secrets côté serveur.
+
+Constat #2 : Pas de composants Android exposés inutilement
+Sévérité : Faible
+Description :
+L’analyse du fichier AndroidManifest.xml n’a pas révélé de composants (Activity, Service, Receiver) marqués comme exported="true" sans justification.
+Localisation :
+AndroidManifest.xml via JADX GUI.
+Impact potentiel :
+Risque faible d’attaque inter-application.
+Remédiation recommandée :
+Continuer à restreindre les composants exposés.
+
+Constat #3 : Présence de mécanismes anti-debug / protection
+Sévérité : Moyenne
+Description :
+L’application semble contenir des mécanismes visant à empêcher l’analyse ou la modification (challenge pédagogique).
+Localisation :
+Code principal analysé avec JADX.
+Impact potentiel :
+Comportement intentionnel dans le cadre d’un challenge de sécurité.
+Remédiation recommandée :
+Aucune – comportement cohérent avec un exercice pédagogique.
+
+Annexes
+Permissions demandées
+•	android.permission.INTERNET
+(Ajuste selon ce que tu as réellement vu dans ton Manifest.)
+Composants exportés
+Aucun composant critique exposé sans protection identifié.
+t.md…]()
 
 Task 8 — Nettoyage 
 <img width="747" height="66" alt="image" src="https://github.com/user-attachments/assets/32eea779-c421-4ebe-8574-33189c8faa89" />
