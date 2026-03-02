@@ -42,144 +42,102 @@ class c
 | **Interface moderne**          | Interface plus récente et adaptée au reverse Android                 | Interface plus ancienne et minimaliste            |
 | **Analyse rapide APK**         | Permet analyse directe sans conversion                               | Nécessite conversion DEX → JAR (ex : via dex2jar) |
 Task 7 — Rédiger le mini-rapport
-[Uploading rapor
-Rapport d’analyse statique – UnCrackable-Level1
+[raport.md](https://github.com/user-attachments/files/25694434/raport.md)
+# Rapport d’analyse statique – OWASP UnCrackable Level 1
 
-Informations générales
-•	Date d’analyse : 01/03/2026
-•	Analyste :  Anas Elmahfoudy & Ghalbane Ziad
-•	APK analysé : UnCrackable-Level1.apk
-•	Version : Version fournie par l’enseignant
-•	Provenance : Fournie par notre enseignant (TP Sécurité Mobile)
-•	Outils utilisés :
-o	JADX 1.5.5
-o	dex2jar v2.4
-o	JD-GUI 1.6.6
+## Informations générales
 
-Résumé exécutif
+* Date d’analyse : 01/03/2026
+* Analystes : Anas Elmahfoudy & Ghalbane Ziad
+* APK analysé : UnCrackable-Level1.apk
+* Provenance : TP Sécurité Mobile
+* Outils utilisés :
+
+  * JADX 1.5.5
+  * dex2jar v2.4
+  * JD-GUI 1.6.6
+
+
+#  Résumé exécutif
+
 Une analyse statique complète de l’application UnCrackable-Level1.apk a été réalisée à l’aide d’outils de décompilation Android.
-L’analyse n’a révélé aucune vulnérabilité critique directe, telle que :
-•	clés API en clair
-•	mots de passe codés en dur
-•	composants exportés non protégés
-•	permissions excessives
-L’application semble volontairement conçue comme un challenge de sécurité (reverse engineering), mais aucune faille de sécurité exploitable évidente n’a été identifiée dans l’analyse statique.
-Niveau de risque global : Faible à Moyen
-Actions recommandées :
-1.	Continuer l’analyse dynamique pour confirmer l’absence de vulnérabilités
-2.	Vérifier l’implémentation des mécanismes anti-debug
-3.	Tester l’application sur un environnement rooté pour analyse approfondie
 
-Constats détaillés
-Constat #1 : Absence de secrets en clair
-Sévérité : Faible
-Description :
+L’analyse a révélé que l’application implémente un mécanisme de vérification basé sur un chiffrement AES. Bien qu’aucun secret ne soit stocké en clair dans le code, le mot de passe est présent sous forme chiffrée dans l’APK, accompagné de sa clé de déchiffrement.
+
+Cela constitue une faiblesse de conception, car un attaquant peut :
+
+* Extraire la clé AES depuis le code
+* Récupérer la donnée chiffrée (Base64)
+* Reproduire le déchiffrement hors ligne
+* Retrouver le secret attendu par l’application
+
+Le secret a pu être récupéré par reverse engineering statique.
+
+Niveau de risque global : **Moyen à Élevé (dans un contexte réel)**
+
+# 🔍 Constats détaillés
+
+
+## 🔎 Constat #1 : Stockage du secret côté client (Faille principale)
+
+**Sévérité : Élevée**
+
+### Description :
+
+L’application vérifie le mot de passe utilisateur en déchiffrant une valeur chiffrée en AES :
+
+```java
+Cipher.getInstance("AES/ECB/PKCS5Padding");
+```
+
+Les éléments suivants ont été identifiés dans le code :
+
+* Clé AES encodée en hexadécimal
+* Donnée chiffrée encodée en Base64
+
+Ces deux éléments sont accessibles dans le code décompilé.
+
+En reproduisant le processus de déchiffrement, nous avons pu extraire le secret suivant :
+
+```
+I want to believe
+```
+
+### Impact potentiel :
+
+Dans une application réelle :
+
+* Contournement total du mécanisme d’authentification
+* Accès non autorisé aux fonctionnalités protégées
+* Perte de confidentialité
+
+### Remédiation recommandée :
+
+Ne jamais stocker de secrets ou de logique d’authentification sensible côté client.
+
+Implémenter la vérification côté serveur.
+
+
+
+## 🔎 Constat #2 : Absence de secrets en clair
+
+**Sévérité : Faible**
+
 Aucune clé API, mot de passe ou token sensible n’a été trouvé en clair dans le code décompilé.
-Localisation :
-Analyse globale du code via JADX GUI.
-Impact potentiel :
-Aucun risque immédiat lié à l’exposition de secrets.
-Remédiation recommandée :
-Maintenir cette bonne pratique en externalisant les secrets côté serveur.
 
-Constat #2 : Pas de composants Android exposés inutilement
-Sévérité : Faible
-Description :
-L’analyse du fichier AndroidManifest.xml n’a pas révélé de composants (Activity, Service, Receiver) marqués comme exported="true" sans justification.
-Localisation :
-AndroidManifest.xml via JADX GUI.
-Impact potentiel :
-Risque faible d’attaque inter-application.
-Remédiation recommandée :
-Continuer à restreindre les composants exposés.
+Cependant, le chiffrement utilisé ne protège pas efficacement le secret puisque la clé est également présente dans l’application.
 
-Constat #3 : Présence de mécanismes anti-debug / protection
-Sévérité : Moyenne
-Description :
-L’application semble contenir des mécanismes visant à empêcher l’analyse ou la modification (challenge pédagogique).
-Localisation :
-Code principal analysé avec JADX.
-Impact potentiel :
-Comportement intentionnel dans le cadre d’un challenge de sécurité.
-Remédiation recommandée :
-Aucune – comportement cohérent avec un exercice pédagogique.
 
-Annexes
-Permissions demandées
-•	android.permission.INTERNET
-(Ajuste selon ce que tu as réellement vu dans ton Manifest.)
-Composants exportés
+
+#  Annexes
+
+### Permissions demandées :
+
+* android.permission.INTERNET
+
+### Composants exportés :
+
 Aucun composant critique exposé sans protection identifié.
-
-
-Rapport d’analyse statique – UnCrackable-Level1
-
-Informations générales
-•	Date d’analyse : 01/03/2026
-•	Analyste :  Anas Elmahfoudy & Ghalbane Ziad
-•	APK analysé : UnCrackable-Level1.apk
-•	Version : Version fournie par l’enseignant
-•	Provenance : Fournie par notre enseignant (TP Sécurité Mobile)
-•	Outils utilisés :
-o	JADX 1.5.5
-o	dex2jar v2.4
-o	JD-GUI 1.6.6
-
-Résumé exécutif
-Une analyse statique complète de l’application UnCrackable-Level1.apk a été réalisée à l’aide d’outils de décompilation Android.
-L’analyse n’a révélé aucune vulnérabilité critique directe, telle que :
-•	clés API en clair
-•	mots de passe codés en dur
-•	composants exportés non protégés
-•	permissions excessives
-L’application semble volontairement conçue comme un challenge de sécurité (reverse engineering), mais aucune faille de sécurité exploitable évidente n’a été identifiée dans l’analyse statique.
-Niveau de risque global : Faible à Moyen
-Actions recommandées :
-1.	Continuer l’analyse dynamique pour confirmer l’absence de vulnérabilités
-2.	Vérifier l’implémentation des mécanismes anti-debug
-3.	Tester l’application sur un environnement rooté pour analyse approfondie
-
-Constats détaillés
-Constat #1 : Absence de secrets en clair
-Sévérité : Faible
-Description :
-Aucune clé API, mot de passe ou token sensible n’a été trouvé en clair dans le code décompilé.
-Localisation :
-Analyse globale du code via JADX GUI.
-Impact potentiel :
-Aucun risque immédiat lié à l’exposition de secrets.
-Remédiation recommandée :
-Maintenir cette bonne pratique en externalisant les secrets côté serveur.
-
-Constat #2 : Pas de composants Android exposés inutilement
-Sévérité : Faible
-Description :
-L’analyse du fichier AndroidManifest.xml n’a pas révélé de composants (Activity, Service, Receiver) marqués comme exported="true" sans justification.
-Localisation :
-AndroidManifest.xml via JADX GUI.
-Impact potentiel :
-Risque faible d’attaque inter-application.
-Remédiation recommandée :
-Continuer à restreindre les composants exposés.
-
-Constat #3 : Présence de mécanismes anti-debug / protection
-Sévérité : Moyenne
-Description :
-L’application semble contenir des mécanismes visant à empêcher l’analyse ou la modification (challenge pédagogique).
-Localisation :
-Code principal analysé avec JADX.
-Impact potentiel :
-Comportement intentionnel dans le cadre d’un challenge de sécurité.
-Remédiation recommandée :
-Aucune – comportement cohérent avec un exercice pédagogique.
-
-Annexes
-Permissions demandées
-•	android.permission.INTERNET
-(Ajuste selon ce que tu as réellement vu dans ton Manifest.)
-Composants exportés
-Aucun composant critique exposé sans protection identifié.
-t.md…]()
 
 Task 8 — Nettoyage 
 <img width="747" height="66" alt="image" src="https://github.com/user-attachments/assets/32eea779-c421-4ebe-8574-33189c8faa89" />
