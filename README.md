@@ -10,6 +10,13 @@ Task 4 — Recherche de chaînes sensibles
 <img width="1073" height="611" alt="image" src="https://github.com/user-attachments/assets/efdd4a7b-f2bd-46da-9b9a-c190a4627d1f" />
 <img width="975" height="608" alt="image" src="https://github.com/user-attachments/assets/07a897b6-b51c-411e-9de5-c0e976077446" />
 <img width="975" height="318" alt="image" src="https://github.com/user-attachments/assets/e7d82940-59bb-4e6a-a0cf-0eb70374db6b" />
+On a trouve une information sensible "Secretkeyspec" :
+<img width="1485" height="422" alt="image" src="https://github.com/user-attachments/assets/d05da785-6159-4130-8966-e8a238b1a9e1" />
+<img width="1524" height="674" alt="image" src="https://github.com/user-attachments/assets/f1b085b9-d021-45ab-b522-72850752da44" />
+pour decrypte :
+<img width="1143" height="487" alt="image" src="https://github.com/user-attachments/assets/1f621414-b1f1-4174-a2ad-3585a4f244f2" />
+<img width="1539" height="104" alt="image" src="https://github.com/user-attachments/assets/941cbccb-301f-48b5-befb-75cbc19b1a61" />
+<img width="621" height="916" alt="image" src="https://github.com/user-attachments/assets/0525c828-bfbe-4cba-aad7-c3f576af99e1" />
 Task 5 — Convertir DEX → JAR avec dex2jar
 <img width="1441" height="309" alt="image" src="https://github.com/user-attachments/assets/9228b74c-81df-4280-bd55-6c95ca014207" />
 <img width="644" height="165" alt="image" src="https://github.com/user-attachments/assets/c9119abe-cb39-4743-a0dc-974471e66cca" />
